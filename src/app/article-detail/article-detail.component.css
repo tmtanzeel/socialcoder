@@ -1,0 +1,40 @@
+.button-panel {
+  margin-top: 50px;;
+  align-items: left;
+}
+
+.btn-default {
+  background-color: #e7e7e7;
+}
+
+::ng-deep .tooltip .ui-tooltip-text {
+  width: 100em; 
+}
+
+.content-head {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 35px;
+    font-family: 'Muli', sans-serif;
+    color: salmon;
+  }
+  
+  .data-container {
+    margin-top: 50px;
+    margin-bottom: 5px;
+  }
+  
+  .contributor-container {
+    margin-top: 5px;
+    margin-bottom: 100px;
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Muli', sans-serif;
+    color: salmon;
+  }
+
+  .btn {
+      margin: 10px 10px 10px 10px;
+  }
+  
+  

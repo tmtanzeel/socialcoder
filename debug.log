@@ -1,0 +1,7 @@
+[0103/185658.195:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\320050~1\AppData\Local\Temp\karma-66556884\Crashpad\attachments\be39685e-3c53-43f3-be5d-462455e59eb4: The system cannot find the path specified. (0x3)
+[0103/185658.420:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0103/185658.927:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0103/185757.654:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\320050~1\AppData\Local\Temp\karma-66556884\Crashpad\attachments\e8f12af1-3597-4d7d-9625-66ef528edf85: The system cannot find the path specified. (0x3)
+[0103/190756.916:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[0110/155403.422:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\320050~1\AppData\Local\Temp\karma-18351350\Crashpad\attachments\ccee6571-5dd8-4ab8-ad6c-4f14c87295e4: The system cannot find the path specified. (0x3)
+[0110/160402.137:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

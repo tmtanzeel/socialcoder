@@ -1,0 +1,14 @@
+.warning-message {
+    color: rgb(220, 20, 60);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.registration-submit-button {
+    margin-top: 10px;
+}
+
+.fa-eye,
+.fa-eye-slash {
+    cursor: pointer;
+}

@@ -1,0 +1,53 @@
+<p-dialog header="Deleting this article!" [(visible)]="display" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70" [baseZIndex]="10000">
+    <span>Are you sure?</span>
+    <p-footer>
+        <button class="btn btn-secondary" type="button" pButton icon="pi pi-check" (click)="display=false; onPress(true)" label="Yes">Yes, Sure</button>
+        <button class="btn btn-secondary" type="button" pButton icon="pi pi-close" (click)="display=false; onPress(false)" label="No">No, leave it!</button>
+    </p-footer>
+</p-dialog>
+
+
+
+<h1 class="heading-text">Here! We found your articles.</h1>
+<div class="row mt-5">
+    <div class="col-md-4 mb-3" *ngFor="let article of articles; let i = index;">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">{{article.title}}</h5>
+                <a (click)="showDialog(article.articleid)" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Delete</a> &nbsp;
+                <a (click)="onPress2(article.articleid)" class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;Improve</a>
+            </div>
+            <div class="card-footer text-muted">
+                {{article.date}}
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<hr>
+<div class="container mb-5">
+    <div class="row pt-5">
+        <div class="col-md-12 col-lg-12 col-sm-12 bg-light">
+            <form [formGroup]="editorForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+              <h3>Title (click to edit)</h3>
+              <!-- <div id="title-container" contentEditable="true">
+              </div> -->
+              <input type="text" size="50" id="title-container">
+            </label>
+                    <small id="emailHelp" class="form-text text-muted">For eg. Installing Nodejs on Ubuntu 18.04 using terminal</small>
+                    <br>
+                    <label for="editor">
+              <h3>Editor</h3>
+            </label>
+                    <quill-editor id="content-container" [styles]="editorStyle" [modules]="config" formControlName="editor" required>
+                        <p>gfhg</p>
+                    </quill-editor>
+                </div>
+                <button class="btn btn-primary mt-3 mb-3">Submit</button>
+            </form>
+            <p-toast position="top-right"></p-toast>
+        </div>
+    </div>
+</div>

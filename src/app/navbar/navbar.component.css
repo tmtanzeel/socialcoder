@@ -1,0 +1,35 @@
+.navbar-brand {
+    color: salmon;
+}
+
+.btn {
+    color: salmon;
+}
+
+.btn:hover {
+    background-color: salmon;
+    color: white;
+}
+
+.btn-outline-success {
+    color: salmon;
+    border-color: salmon;
+}
+
+.fa-lg {
+    color: white;
+}
+
+.login:hover {
+    color: salmon;
+}
+
+.current-user {
+    color: white;
+}
+
+.current-user-item {
+    margin-top: 6px;
+    margin-right: 30px;
+    pointer-events: none;
+}

@@ -1,0 +1,40 @@
+.row {
+    max-height: 50%;
+}
+
+.actual-image {
+    max-width: 50%;
+    max-height: auto;
+}
+
+.first {
+    font-size: 30px;
+    font-family: 'Muli', sans-serif;
+    color: salmon;
+}
+
+.second {
+    font-size: 20px;
+    font-family: 'Muli', sans-serif;
+}
+
+.third {
+    font-size: 20px;
+    font-family: 'Muli', sans-serif;
+}
+
+.fourth {
+    font-size: 30px;
+    font-family: 'Muli', sans-serif;
+    color: salmon;
+}
+
+.fifth {
+    font-size: 20px;
+    font-family: 'Muli', sans-serif;
+}
+
+.sixth {
+    font-size: 20px;
+    font-family: 'Muli', sans-serif;
+}
