@@ -41,7 +41,7 @@ export class ArticleDetailComponent implements OnInit {
     downvoters: []
   };
 
-  constructor(private messageService: MessageService, private router: Router, private _articleService: ArticleService, private _router: ActivatedRoute, private _authService: AuthService) { }
+  constructor(private messageService: MessageService, private router: Router, private _articleService: ArticleService, private _router: ActivatedRoute, public _authService: AuthService) { }
 
   showUpvoteConfirmation() {
     this.messageService.add({severity:'success', summary:'Success Message', detail:'Your upvote is added'});
