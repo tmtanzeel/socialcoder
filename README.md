@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## If Karma logs issues regarding unit testing
+
+Make sure the browser mentioned in 'browser' property in _karma.conf.js_ is installed on your machine. Alternatively you can replace the value with your preferred browser
