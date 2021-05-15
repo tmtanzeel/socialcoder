@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class TorsoComponent implements OnInit {
 
-  supportLanguages =['en-US', 'de-DE', 'fr', 'hi'];
+  supportLanguages =['en-US', 'de-DE', 'ar-AE', 'fr', 'hi'];
 
   constructor(private translateService: TranslateService) { 
     this.translateService.addLangs(this.supportLanguages);
