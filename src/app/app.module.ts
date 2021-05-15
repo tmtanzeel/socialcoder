@@ -11,7 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { ArticleService } from './article.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { TorsoComponent } from './torso/torso.component';
 import { FooterComponent } from './footer/footer.component';
@@ -41,6 +41,9 @@ import { EllipsisPipe } from './pipes/ellipsis.pipe';
 import { UserService } from './user.service';
 import { LoginService } from './core/authentication/login.service';
 import {DialogModule} from 'primeng/dialog';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -84,6 +87,16 @@ const appRoutes: Routes = [
     TooltipModule,
     NgxPaginationModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+    TranslateModule.forRoot(
+      {
+        loader: {
+          provide: TranslateLoader,
+          useFactory: (http: HttpClient) => { return new TranslateHttpLoader(http, '../assets/i18n/','.json')},
+          deps: [HttpClient]
+        }
+      }
+    )
   ],
   providers: [MessageService, AuthService, AuthGuard, ArticleService, UserService, LoginService,
   {
