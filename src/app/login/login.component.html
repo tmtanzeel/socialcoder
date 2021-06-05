@@ -20,7 +20,14 @@
                             </span>
                             <input type="password" class="form-control" name="passwordInput" [(ngModel)]="loginUserData.password" [type]="hide ? 'password':'text'">
                         </div>
-                        <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+                        
+                        <button type="submit" (click)="onSubmit()" class="btn btn-primary">
+                            <span *ngIf="credentialsSubmitted">
+                                <span *ngIf="responseAwaited" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </span>
+                            Submit
+                        </button>
+
                         <br><br>
                         <hr>
                         <div *ngIf="flag.valid===false" id="login-denied">
