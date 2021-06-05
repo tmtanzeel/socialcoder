@@ -30,6 +30,8 @@ export class MyArticlesComponent implements OnInit {
     backgroundColor: '#ffffff'
   }
 
+  waitingForResponse: boolean=true;
+
   config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -63,10 +65,18 @@ export class MyArticlesComponent implements OnInit {
     this.messageService.add({severity:'success', summary:'Success Message', detail:'Article deleted'});
   }
 
+  loadingIntoEditor() {
+    this.messageService.add({severity:'info', summary:'Loading...', detail:'Loading article into editor'});
+  }
+
+  articleLoadedSuccessfully() {
+    this.messageService.add({severity:'success', summary:'Loaded successfully', detail:'You can edit the article now'});
+  }
+
   ngOnInit() {
     this._authService.getMyArticles()
     .subscribe(
-      res => this.articles = res,
+      res => {this.articles = res;this.waitingForResponse=false},
       err => console.log(err)
     );
 
@@ -92,6 +102,7 @@ export class MyArticlesComponent implements OnInit {
   }
 
   onPress2(id) {
+    this.loadingIntoEditor();
     this.updatedPost.articleid=id;
     this._articleService.fetchArticle(id)
     .subscribe (
@@ -100,6 +111,7 @@ export class MyArticlesComponent implements OnInit {
         this.editorForm = new FormGroup({
           'editor': new FormControl(data.content)
         });
+        this.articleLoadedSuccessfully();
       }
     );
   }
