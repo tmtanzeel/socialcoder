@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
   fullEye=true;
   scratchedEye=false;
 
+  credentialsSubmitted: boolean = false;
+  responseAwaited: boolean = true;
+
   loginUserData ={
     email: "",
     password: ""
@@ -53,6 +56,8 @@ export class LoginComponent implements OnInit {
 
  
   onSubmit() {
+    this.credentialsSubmitted = true;
+    this.responseAwaited=true;
     this._auth.loginUser(this.loginUserData)
     .subscribe(
       res => {
@@ -62,9 +67,13 @@ export class LoginComponent implements OnInit {
         // localStorage.setItem('userid', res.user.userid);
         // this._router.navigate(['/articles']);
         this.loginService.processLogin(res).subscribe();
+        this.responseAwaited=false;
+        this.credentialsSubmitted = false;
       },
       err => {
         this.flag.valid=false,
+        this.responseAwaited=false;
+        this.credentialsSubmitted=false;
         // document.querySelector('#login-denied').innerHTML="hello";
         this.message=err.error;
       }
