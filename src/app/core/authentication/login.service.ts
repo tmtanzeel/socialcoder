@@ -21,7 +21,7 @@ export class LoginService {
           error: err => {
           },
           complete: () => {
-            this.router.navigateByUrl('/articles')
+            this.router.navigateByUrl('/')
           }
         })
       } catch{
