@@ -36,6 +36,10 @@ export class ContributeComponent implements OnInit {
     this.messageService.add({severity:'success', summary:'Success Message', detail:'Article submitted'});
   }
 
+  unableToSubmit() {
+    this.messageService.add({severity:'error', summary:'Failure Message', detail:'Unable to submitt'});
+  }
+
   config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -60,38 +64,43 @@ export class ContributeComponent implements OnInit {
 
   onSubmit() {
     
-    var titleFromField = (<HTMLInputElement>document.getElementById("inputTitle")).value;
+    var titleFromField = (<HTMLInputElement>document.getElementById("inputTitle")).value.trim();
     var content = this.editorForm.get('editor').value;
 
-    // READ STRING FROM LOCAL STORAGE
-    var retrievedObject = localStorage.getItem('userProfile');
+    if(titleFromField==="" || content===null) {
+      this.unableToSubmit();
+    }
+    else {
+      // READ STRING FROM LOCAL STORAGE
+      var retrievedObject = localStorage.getItem('userProfile');
 
-    // CONVERT STRING TO REGULAR JS OBJECT
-    var parsedObject = JSON.parse(retrievedObject);
+      // CONVERT STRING TO REGULAR JS OBJECT
+      var parsedObject = JSON.parse(retrievedObject);
 
-    // ACCESS DATA
-    var contributor=parsedObject.firstName+" "+parsedObject.lastName;
+      // ACCESS DATA
+      var contributor=parsedObject.firstName+" "+parsedObject.lastName;
+      
+      var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+      var today  = new Date();
+      var contribution_date=today.toLocaleDateString("en-US", options);
     
-    var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-    var today  = new Date();
-    var contribution_date=today.toLocaleDateString("en-US", options);
-   
-    var randomId=Math.random().toString(36).substr(2, 9);
+      var randomId=Math.random().toString(36).substr(2, 9);
 
-    this.makeNewPost.articleid=randomId;
-    this.makeNewPost.title=titleFromField;
-    this.makeNewPost.content=content;
-    this.makeNewPost.date=contribution_date+' IST';
-    this.makeNewPost.contributor=contributor;
+      this.makeNewPost.articleid=randomId;
+      this.makeNewPost.title=titleFromField;
+      this.makeNewPost.content=content;
+      this.makeNewPost.date=contribution_date+' IST';
+      this.makeNewPost.contributor=contributor;
 
-    this._auth.pushNewPost(this.makeNewPost)
-    .subscribe (
-      res => {
-        (<HTMLInputElement>document.getElementById("inputTitle")).value="";
-        this.editorForm.reset();
-        this.addSingle();
-      },
-      err => console.log(err)
-    );
+      this._auth.pushNewPost(this.makeNewPost)
+      .subscribe (
+        res => {
+          (<HTMLInputElement>document.getElementById("inputTitle")).value="";
+          this.editorForm.reset();
+          this.addSingle();
+        },
+        err => console.log(err)
+      );
+    }
   }
 }
