@@ -13,7 +13,7 @@ export class AuthService {
   private _contributeUrl = "https://obscure-tundra-38074.herokuapp.com/api/contribute";
   private _askUrl = "https://obscure-tundra-38074.herokuapp.com/api/ask";
   private _deleteArtURL = "https://obscure-tundra-38074.herokuapp.com/api/delete-article";
-  private _onlyMyArticlesUrl = "https://obscure-tundra-38074.herokuapp.com/api/myarticles";
+  private _onlyMyArticlesUrl = "https://obscure-tundra-38074.herokuapp.com/api/articles";
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -59,6 +59,8 @@ export class AuthService {
     
     // ACCESS DATA
     var person=parsedObject.firstName+" "+parsedObject.lastName;
+    console.log("person ", person);
+    
     return this._http.get<any>(this._onlyMyArticlesUrl+'/'+person);
   }
 
