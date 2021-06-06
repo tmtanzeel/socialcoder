@@ -37,3 +37,8 @@
 .pagination-controls {
     margin-bottom: 20px;
 }
+
+.article-row {
+    margin-left: 150px;
+    margin-right: 150px;
+}
