@@ -30,10 +30,10 @@
                         <div class="form-group">
                             <label for="passwordInput">Password</label>&nbsp;&nbsp;
                             <span *ngIf="isFullEye()">
-                                <i class="fa fa-eye icon" (click)="hide=!hide; changeEye();"></i>
+                                <span class="fa fa-eye icon" (click)="hide=!hide; changeEye();"></span>
                             </span>
                             <span *ngIf="isScratchedEye()">
-                                <i class="fa fa-eye-slash icon" (click)="hide=!hide; changeEye();"></i>
+                                <span class="fa fa-eye-slash icon" (click)="hide=!hide; changeEye();"></span>
                             </span>
                             <input formControlName="password" type="password" class="form-control" id="passwordInput" [type]="hide ? 'password':'text'" placeholder="Enter Password">
                         </div>
@@ -49,32 +49,32 @@
                         <hr>
                         <div class="validations" *ngIf="form.touched">
                             <span>
-                  <i class="fa fa-check-circle" style="color:green;"  *ngIf="form.controls.firstname.valid && form.controls.lastname.valid"></i>
-                  <i class="fa fa-times-circle" style="color:firebrick;" *ngIf="form.controls.firstname.invalid || form.controls.lastname.invalid"></i>
+                  <span class="fa fa-check-circle" style="color:green;"  *ngIf="form.controls.firstname.valid && form.controls.lastname.valid"></span>
+                  <span class="fa fa-times-circle" style="color:firebrick;" *ngIf="form.controls.firstname.invalid || form.controls.lastname.invalid"></span>
                   Minimum length of first and last name is 4 characters without spaces.
               </span>
                             <br>
                             <span>
-                  <i class="fa fa-check-circle" style="color:green;" *ngIf="form.controls.username.valid"></i>
-                  <i class="fa fa-times-circle" style="color:firebrick;"  *ngIf="form.controls.username.invalid"></i>
+                  <span class="fa fa-check-circle" style="color:green;" *ngIf="form.controls.username.valid"></span>
+                  <span class="fa fa-times-circle" style="color:firebrick;"  *ngIf="form.controls.username.invalid"></span>
                   Username should be minimum 4 characters long without spaces.
               </span>
                             <br>
                             <span>
-                <i class="fa fa-check-circle" style="color:green;"  *ngIf="form.controls.cnfpass.valid"></i>
-                <i class="fa fa-times-circle" style="color:firebrick;" *ngIf="form.controls.cnfpass.invalid"></i>
+                <span class="fa fa-check-circle" style="color:green;"  *ngIf="form.controls.cnfpass.valid"></span>
+                <span class="fa fa-times-circle" style="color:firebrick;" *ngIf="form.controls.cnfpass.invalid"></span>
                 Minimum password length is 4 digit without spaces.
             </span>
                             <br>
                             <span>
-                <i class="fa fa-check-circle" style="color:green;" *ngIf="form.controls.cnfpass.valid"></i>
-                <i class="fa fa-times-circle" style="color:firebrick;" *ngIf="form.controls.cnfpass.invalid"></i>
+                <span class="fa fa-check-circle" style="color:green;" *ngIf="form.controls.cnfpass.valid"></span>
+                <span class="fa fa-times-circle" style="color:firebrick;" *ngIf="form.controls.cnfpass.invalid"></span>
                 Password and confirm password should match.
             </span>
                             <br>
                             <span>
-                <i class="fa fa-check-circle" style="color:green;" *ngIf="form.controls.password.valid"></i>
-                <i class="fa fa-times-circle" style="color:firebrick;" *ngIf="form.controls.password.invalid"></i>
+                <span class="fa fa-check-circle" style="color:green;" *ngIf="form.controls.password.valid"></span>
+                <span class="fa fa-times-circle" style="color:firebrick;" *ngIf="form.controls.password.invalid"></span>
                 Password should not contain any white spaces
             </span>
                         </div>
