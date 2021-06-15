@@ -13,10 +13,10 @@
                         <div class="form-group">
                             <label for="passwordInput">Password</label>&nbsp;&nbsp;
                             <span *ngIf="isFullEye()">
-                              <i class="fa fa-eye icon" (click)="hide=!hide; changeEye();"></i>
+                              <span class="fa fa-eye icon" (click)="hide=!hide; changeEye();"></span>
                             </span>
                             <span *ngIf="isScratchedEye()">
-                              <i class="fa fa-eye-slash icon" (click)="hide=!hide; changeEye();"></i>
+                              <span class="fa fa-eye-slash icon" (click)="hide=!hide; changeEye();"></span>
                             </span>
                             <input type="password" class="form-control" name="passwordInput" [(ngModel)]="loginUserData.password" [type]="hide ? 'password':'text'">
                         </div>
@@ -31,7 +31,7 @@
                         <br><br>
                         <hr>
                         <div *ngIf="flag.valid===false" id="login-denied">
-                            <i class="fa fa-times-circle" style="color:firebrick;"></i> {{message}}
+                            <span class="fa fa-times-circle" style="color:firebrick;"></span> {{message}}
                         </div>
                     </form>
                 </div>
