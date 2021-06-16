@@ -15,6 +15,12 @@
       "pre-commit": "lint-staged"
     }
   },
+  "lint-staged": {
+    "*.{js,json,css,md,html}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.0.0",
