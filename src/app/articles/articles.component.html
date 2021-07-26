@@ -33,7 +33,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h5 class="card-title">{{article.title | ellipsis:55}}</h5>
-                <a class="btn btn-primary" [routerLink]="['/articles',article.articleid]">Read More</a>
+                <a class="btn btn-primary" target="_blank" [routerLink]="['/articles',article.articleid]">Read More</a>
             </div>
             <div class="card-footer text-muted">
                 {{article.date}}
