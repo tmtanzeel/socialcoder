@@ -10,7 +10,10 @@ import { MessageService } from 'primeng/components/common/api';
   styleUrls: ['./contribute.component.css']
 })
 export class ContributeComponent implements OnInit {
-  makeNewPost={
+
+  submittingArticle: boolean = false;
+
+  makeNewPost = {
     articleid: "",
     title: "",
     content: "",
@@ -33,19 +36,19 @@ export class ContributeComponent implements OnInit {
   }
 
   addSingle() {
-    this.messageService.add({severity:'success', summary:'Success Message', detail:'Article submitted'});
+    this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Article submitted' });
   }
 
   unableToSubmit() {
-    this.messageService.add({severity:'error', summary:'Failure Message', detail:'Unable to submitt'});
+    this.messageService.add({ severity: 'error', summary: 'Failure Message', detail: 'Unable to submitt' });
   }
 
   config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
       ['code-block'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'script': 'sub'}, { 'script': 'super' }],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],
       [{ 'size': ['small', false, 'large', 'huge'] }],
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       [{ 'color': [] }, { 'background': [] }],
@@ -60,14 +63,15 @@ export class ContributeComponent implements OnInit {
     });
   }
 
-  @ViewChild('searchInput', {static: false}) searchInputRef: ElementRef;
+  @ViewChild('searchInput', { static: false }) searchInputRef: ElementRef;
 
   onSubmit() {
-    
+    this.submittingArticle = true;
+
     var titleFromField = (<HTMLInputElement>document.getElementById("inputTitle")).value.trim();
     var content = this.editorForm.get('editor').value;
 
-    if(titleFromField==="" || content===null) {
+    if (titleFromField === "" || content === null) {
       this.unableToSubmit();
     }
     else {
@@ -78,29 +82,30 @@ export class ContributeComponent implements OnInit {
       var parsedObject = JSON.parse(retrievedObject);
 
       // ACCESS DATA
-      var contributor=parsedObject.firstName+" "+parsedObject.lastName;
-      
-      var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-      var today  = new Date();
-      var contribution_date=today.toLocaleDateString("en-US", options);
-    
-      var randomId=Math.random().toString(36).substr(2, 9);
+      var contributor = parsedObject.firstName + " " + parsedObject.lastName;
 
-      this.makeNewPost.articleid=randomId;
-      this.makeNewPost.title=titleFromField;
-      this.makeNewPost.content=content;
-      this.makeNewPost.date=contribution_date+' IST';
-      this.makeNewPost.contributor=contributor;
+      var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+      var today = new Date();
+      var contribution_date = today.toLocaleDateString("en-US", options);
+
+      var randomId = Math.random().toString(36).substr(2, 9);
+
+      this.makeNewPost.articleid = randomId;
+      this.makeNewPost.title = titleFromField;
+      this.makeNewPost.content = content;
+      this.makeNewPost.date = contribution_date + ' IST';
+      this.makeNewPost.contributor = contributor;
 
       this._auth.pushNewPost(this.makeNewPost)
-      .subscribe (
-        res => {
-          (<HTMLInputElement>document.getElementById("inputTitle")).value="";
-          this.editorForm.reset();
-          this.addSingle();
-        },
-        err => console.log(err)
-      );
+        .subscribe(
+          res => {
+            (<HTMLInputElement>document.getElementById("inputTitle")).value = "";
+            this.editorForm.reset();
+            this.submittingArticle = false;
+            this.addSingle();
+          },
+          err => console.log(err)
+        );
     }
   }
 }
