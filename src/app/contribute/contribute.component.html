@@ -15,7 +15,12 @@
           </label>
           <quill-editor [styles]="editorStyle" [modules]="config" formControlName="editor" required></quill-editor>
          </div>
-        <button class="btn btn-primary mt-3 mb-3">Submit</button>
+         <button type="submit" class="btn btn-primary mt-3 mb-3">
+          <span *ngIf="submittingArticle">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </span>
+          Submit
+      </button>
       </form>
       <p-toast position="top-right"></p-toast>
     </div>
