@@ -31,3 +31,44 @@
   font-size: 20px;
   color: salmon;
 }
+
+.updates {
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  color: white;
+}
+
+.merge {
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  color: salmon;
+}
+
+.by {
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  color: white;
+}
+
+.user {
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  color: salmon;
+}
+
+.on {
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  color: white;
+}
+
+.date {
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  color: salmon;
+
+}
+
+.merge_link {
+  color: salmon;
+}
