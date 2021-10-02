@@ -19,8 +19,7 @@ export class ArticleService {
   private _updateArtDownvotesURL = "https://obscure-tundra-38074.herokuapp.com/api/update-downvotes";
   private _updateDownvotersListURL = "https://obscure-tundra-38074.herokuapp.com/api/update-upvoters-list";
 
-
-  clickedArticle : Object = {};
+  clickedArticle: Object = {};
 
   constructor(private http: HttpClient) { }
 
@@ -33,11 +32,11 @@ export class ArticleService {
   }
 
   deleteArticle(id) {
-    return this.http.delete<any>(this._deleteUrl+'/'+id);
+    return this.http.delete<any>(this._deleteUrl + '/' + id);
   }
 
   fetchArticle(id) {
-    return this.http.get<any>(this._fetchUrl+'/'+id);
+    return this.http.get<any>(this._fetchUrl + '/' + id);
   }
 
   updateAnArticle(updatedArticle) {
@@ -45,27 +44,27 @@ export class ArticleService {
   }
 
   increaseUpvote(updatedArticle, id) {
-    return this.http.put<any>(this._updateArtUpvotesURL+'/'+id, updatedArticle);
+    return this.http.put<any>(this._updateArtUpvotesURL + '/' + id, updatedArticle);
   }
 
   addUserToUpvotersList(updatedArticle, id, id1) {
-    return this.http.put<any>(this._addToUpvotersListURL+'/'+id+'/'+id1, updatedArticle);
+    return this.http.put<any>(this._addToUpvotersListURL + '/' + id + '/' + id1, updatedArticle);
   }
 
   removeUserFromUpvotersList(updatedArticle, id, id1) {
-    return this.http.delete<any>(this._deleteFromUpvotersListURL+'/'+id+'/'+id1, updatedArticle);
+    return this.http.delete<any>(this._deleteFromUpvotersListURL + '/' + id + '/' + id1, updatedArticle);
   }
 
   addUserToDownvotersList(updatedArticle, id, id1) {
-    return this.http.put<any>(this._addToDownvotersListURL+'/'+id+'/'+id1, updatedArticle);
+    return this.http.put<any>(this._addToDownvotersListURL + '/' + id + '/' + id1, updatedArticle);
   }
 
   removeUserFromDownvotersList(updatedArticle, id, id1) {
-    return this.http.delete<any>(this._deleteFromDownvotersListURL+'/'+id+'/'+id1, updatedArticle);
+    return this.http.delete<any>(this._deleteFromDownvotersListURL + '/' + id + '/' + id1, updatedArticle);
   }
 
   decreaseUpvote(updatedArticle, id) {
-    return this.http.put<any>(this._updateArtDownvotesURL+'/'+id, updatedArticle);
+    return this.http.put<any>(this._updateArtDownvotesURL + '/' + id, updatedArticle);
   }
 
   setClickedArticleObj(id) {
@@ -76,12 +75,12 @@ export class ArticleService {
     return localStorage.getItem('__ai');
   }
 
-  getArticleById(id: string): Observable<any>  {
+  getArticleById(id: string): Observable<any> {
     return this.getAllArticles()
       .pipe(
         map((articles: any[]) => articles.find(article => article.articleid === id))
       );
-}
+  }
 
   getAllArticles() {
     return this.http.get<any>(this._articlesUrl)
