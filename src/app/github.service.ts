@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class GithubService {
 
-  private _commitHistoryUrl = "https://obscure-tundra-38074.herokuapp.com/api/github/commithistory";
+  private _commitHistoryUrl = "https://github-api-nodejs.herokuapp.com/api/github/commitinfo/tmtanzeel/socialcoder";
 
   constructor(private http: HttpClient) {
     // console.log("service is now ready!");
