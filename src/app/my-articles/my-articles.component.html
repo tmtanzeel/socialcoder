@@ -9,6 +9,13 @@
 
 <!-- list of contributions for the current logged in user -->
 <h1 class="heading-text">Here! We found your articles.</h1>
+<div class="search-wrapper">
+    <form class="form-inline waves-light" style="float: right;" (keydown)="keyDownFunction($event)" mdbWavesEffect>
+        <div class="md-form mt-0">
+            <input class="form-control mr-sm-2" type="search" [(ngModel)]="text" [ngModelOptions]="{standalone: true}" placeholder="Search">
+        </div>
+    </form>
+</div>
 <div class="container-fliud my-articles-container">
     <div class="col-md-8" style="height: 500px;">
         <div class="container mb-5">
@@ -38,14 +45,19 @@
             </div>
         </div>
     </div>
+
     <div class="col-md-4" style="height: 610px; margin-top: 50px; overflow-y: scroll;">
+        <div *ngIf="filteredArticles.length==0">
+            <h5>No results found! Try modifying your search.</h5>
+        </div>
         <!-- spinner animation -->
         <div *ngIf="waitingForResponse" align="center">
             <div class="spinner-border m-5" role="status">
                 <span class="sr-only"></span>
             </div>
         </div>
-        <span *ngFor="let article of articles; let i = index;">
+
+        <span *ngFor="let article of filteredArticles; let i = index;">
             <div class="card text-center">
                 <div class="card-body">
                     <h5 class="card-title">{{article.title}}</h5>

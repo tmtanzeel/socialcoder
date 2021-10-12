@@ -10,8 +10,8 @@ import { MessageService } from 'primeng/components/common/api';
   styleUrls: ['./my-articles.component.css']
 })
 export class MyArticlesComponent implements OnInit {
-  
-  updatedPost={
+
+  updatedPost = {
     title: "",
     articleid: "",
     content: "",
@@ -20,6 +20,10 @@ export class MyArticlesComponent implements OnInit {
   };
 
   articles = []
+  filteredArticles = [];
+
+  text = '';
+
 
   editorForm: FormGroup;
   //lstarts: Posts[];
@@ -30,14 +34,14 @@ export class MyArticlesComponent implements OnInit {
     backgroundColor: '#ffffff'
   }
 
-  waitingForResponse: boolean=true;
+  waitingForResponse: boolean = true;
 
   config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
       ['code-block'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'script': 'sub'}, { 'script': 'super' }],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],
       [{ 'size': ['small', false, 'large', 'huge'] }],
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       [{ 'color': [] }, { 'background': [] }],
@@ -50,35 +54,35 @@ export class MyArticlesComponent implements OnInit {
 
   display: boolean = false;
 
-  deletePostId:number;
+  deletePostId: number;
 
   showDialog(id) {
-      this.display = true;
-      this.deletePostId=id
-  } 
+    this.display = true;
+    this.deletePostId = id
+  }
 
   addSingle() {
-    this.messageService.add({severity:'success', summary:'Success Message', detail:'Article updated'});
+    this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Article updated' });
   }
 
   deleteSingle() {
-    this.messageService.add({severity:'success', summary:'Success Message', detail:'Article deleted'});
+    this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Article deleted' });
   }
 
   loadingIntoEditor() {
-    this.messageService.add({severity:'info', summary:'Loading...', detail:'Loading article into editor'});
+    this.messageService.add({ severity: 'info', summary: 'Loading...', detail: 'Loading article into editor' });
   }
 
   articleLoadedSuccessfully() {
-    this.messageService.add({severity:'success', summary:'Loaded successfully', detail:'You can edit the article now'});
+    this.messageService.add({ severity: 'success', summary: 'Loaded successfully', detail: 'You can edit the article now' });
   }
 
   ngOnInit() {
     this._authService.getMyArticles()
-    .subscribe(
-      res => {this.articles = res;this.waitingForResponse=false},
-      err => console.log(err)
-    );
+      .subscribe(
+        res => { this.articles = res; this.waitingForResponse = false; this.filteredArticles = res },
+        err => console.log(err)
+      );
 
     this.editorForm = new FormGroup({
       'editor': new FormControl(null)
@@ -86,55 +90,70 @@ export class MyArticlesComponent implements OnInit {
   }
 
   onPress(isDelete) {
-    if(isDelete && this.deletePostId)  {
+    if (isDelete && this.deletePostId) {
       this.deleteSingle();
-      setTimeout( () => { window.location.reload(); }, 1000 );
+      setTimeout(() => { window.location.reload(); }, 1000);
       this._articleService.deleteArticle(this.deletePostId)
-      .subscribe (
-        data => {
-          console.log("deleted");
-        }
-      );
-   }
-   else {
-    this.deletePostId = null;
-   }    
+        .subscribe(
+          data => {
+            console.log("deleted");
+          }
+        );
+    }
+    else {
+      this.deletePostId = null;
+    }
   }
 
   onPress2(id) {
     this.loadingIntoEditor();
-    this.updatedPost.articleid=id;
+    this.updatedPost.articleid = id;
     this._articleService.fetchArticle(id)
-    .subscribe (
-      data => {
-        (<HTMLInputElement>document.querySelector('#title-container')).value=data.title;
-        this.editorForm = new FormGroup({
-          'editor': new FormControl(data.content)
-        });
-        this.articleLoadedSuccessfully();
-      }
-    );
+      .subscribe(
+        data => {
+          (<HTMLInputElement>document.querySelector('#title-container')).value = data.title;
+          this.editorForm = new FormGroup({
+            'editor': new FormControl(data.content)
+          });
+          this.articleLoadedSuccessfully();
+        }
+      );
   }
 
   onSubmit() {
-    var titleFromField= (<HTMLInputElement>document.getElementById("title-container")).value;
+    var titleFromField = (<HTMLInputElement>document.getElementById("title-container")).value;
     var content = this.editorForm.get('editor').value;
-    var contributor = localStorage.getItem('firstname') +" "+localStorage.getItem('lastname');
+    var contributor = localStorage.getItem('firstname') + " " + localStorage.getItem('lastname');
     var date = new Date().toUTCString();
 
-    this.updatedPost.title=titleFromField;
-    this.updatedPost.content=content;
-    this.updatedPost.date=date;
-    this.updatedPost.contributor=contributor; 
+    this.updatedPost.title = titleFromField;
+    this.updatedPost.content = content;
+    this.updatedPost.date = date;
+    this.updatedPost.contributor = contributor;
 
     this._articleService.updateAnArticle(this.updatedPost)
-    .subscribe (
-      res => {
-        (<HTMLInputElement>document.getElementById("title-container")).value="";
-        this.editorForm.reset();
-        this.addSingle();
-      },
-      err => console.log(err)
-    );
+      .subscribe(
+        res => {
+          (<HTMLInputElement>document.getElementById("title-container")).value = "";
+          this.editorForm.reset();
+          this.addSingle();
+        },
+        err => console.log(err)
+      );
+  }
+
+  keyDownFunction(event) {
+    console.log("called");
+
+    if (event.keyCode === 13) {
+      this.SearchFunction(this.text);
+    }
+  }
+
+  SearchFunction(text: string) {
+    this.filteredArticles = (this.articles.filter(e => {
+      return e.title.toLocaleLowerCase() === text.toLocaleLowerCase ||
+        e.title.toLowerCase().indexOf(text.toLowerCase()) >= 0
+    }));
   }
 }
