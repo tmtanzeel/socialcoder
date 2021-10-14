@@ -1,4 +1,4 @@
-<div class="button-panel" *ngIf="_authService.loggedIn()">
+<div class="button-panel" *ngIf="_authService.loggedIn() && showButtonPanel">
     <button class="btn btn-default fa fa-arrow-left" (click)="back()"> Back</button>
     <button class="btn btn-success fa fa-thumbs-up" (click)="upvoted()" [pTooltip]="allowUpvote ? msg1 : msg2" tooltipPosition="bottom" showDelay="200" hideDelay="100" [disabled]="!allowUpvote">
         Upvote ({{ currentUpvotes }})
