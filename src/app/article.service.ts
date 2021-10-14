@@ -47,8 +47,8 @@ export class ArticleService {
     return this.http.put<any>(this._updateArtUpvotesURL + '/' + id, updatedArticle);
   }
 
-  addUserToUpvotersList(updatedArticle, id, id1) {
-    return this.http.put<any>(this._addToUpvotersListURL + '/' + id + '/' + id1, updatedArticle);
+  addUserToUpvotersList(userWhoUpvoted, articleGotUpvoted) {
+    return this.http.post<any>(this._addToUpvotersListURL + '/' + articleGotUpvoted + '/' + userWhoUpvoted, { responseType: 'text' as 'text' });
   }
 
   removeUserFromUpvotersList(updatedArticle, id, id1) {
