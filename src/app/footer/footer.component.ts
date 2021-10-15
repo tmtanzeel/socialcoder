@@ -37,7 +37,6 @@ export class FooterComponent implements OnInit {
           this.timeStamp = res[0].commit.author.date;
           this.mergeLink = res[0].html_url;
           this.userLink = "https://github.com/" + this.pushedBy;
-
         },
         err => console.log(err)
       )

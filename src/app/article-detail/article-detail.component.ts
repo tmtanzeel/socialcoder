@@ -70,10 +70,10 @@ export class ArticleDetailComponent implements OnInit {
 
     this.showButtonPanel = true;
     this.updatedVotes.articleid = article.articleid;
-    this.currentUpvotes = this.article.upvotes;
+    this.currentUpvotes = this.article.upvoters.length;
     console.log(this.currentUpvotes);
 
-    this.currentDownvotes = this.article.downvotes;
+    this.currentDownvotes = this.article.downvoters.length;
 
     this.articleDetails.upvotes = this.article.upvotes;
     this.articleDetails.downvotes = this.article.downvotes;
@@ -105,7 +105,6 @@ export class ArticleDetailComponent implements OnInit {
       const fetchedUserProfileAsString = localStorage.getItem('userProfile');
       const parsedSameToObject = JSON.parse(fetchedUserProfileAsString);
       this.currentLoggedInUserId = parsedSameToObject.userid;
-      console.log(this.article.upvoters);
       this.article.upvoters.forEach(user => {
         if (user === this.currentLoggedInUserId) {
           found = true;
@@ -134,63 +133,22 @@ export class ArticleDetailComponent implements OnInit {
     this.router.navigate(['/articles'])
   }
 
-  // upvoted() {
-  //   this.allowUpvote = false;
-  //   this.allowDownvote = true;
-  //   if (this.isADownvoter()) {
-  //     // increase 1 upvote
-  //     this.updatedVotes.downvotes = this.article.downvotes;
-  //     this.currentUpvotes = (this.article.upvotes) + 1;
-  //     console.log("this---> " + this.currentUpvotes);
-
-  //     this.updatedVotes.upvotes = this.currentUpvotes;
-  //     // Decrease 1 downvote
-  //     this.currentDownvotes = (this.article.downvotes) - 1;
-  //     this.updatedVotes.downvotes = this.currentDownvotes;
-  //     this.removeUserFromDownvotersList();
-  //     this.addUserToUpvotersList();
-  //     console.log(this.updatedVotes.upvotes);
-  //     //this.onPageLoad();
-  //   }
-  //   else {
-  //     // increase 1 upvote
-  //     this.updatedVotes.downvotes = this.article.downvotes;
-  //     this.currentUpvotes = (this.article.upvotes) + 1;
-  //     this.updatedVotes.upvotes = this.currentUpvotes;
-  //     this.addUserToUpvotersList();
-  //     console.log(this.updatedVotes.upvotes);
-  //     //this.onPageLoad();
-  //   }
-  //   console.log(this.allowUpvote + " " + this.allowDownvote);
-  // }
-
   upvoted() {
+    this.showUpvoteConfirmation();
+  }
+
+  upvoted1() {
     this.allowUpvote = false;
     this.allowDownvote = true;
-    this.currentUpvotes += 1;
     if (this.isADownvoter()) {
       this.addUserToUpvotersList();  //done
-      this.removeUserFromUpvotersList();
+      this.removeUserFromDownvotersList();
     }
     else {
       this.addUserToUpvotersList();
     }
-    //window.location.reload();
-  }
-
-  addUserToUpvotersList() {
-    console.log("upvoting....!");
-
-    const fetchedString = localStorage.getItem('userProfile');
-    const parsedToObject = JSON.parse(fetchedString);
-    const userWhoUpvoted = parsedToObject.userid;
-    const articleGotUpvoted = this.updatedVotes.articleid;
-    this._articleService.addUserToUpvotersList(userWhoUpvoted, articleGotUpvoted)
-      .subscribe(
-        res => {
-          console.log("Response: ", res);
-        }
-      );
+    this.showUpvoteConfirmation();
+    setTimeout(() => { window.location.reload() }, 3000);
   }
 
   downvoted() {
@@ -203,15 +161,29 @@ export class ArticleDetailComponent implements OnInit {
     else {
       this.addUserToDownvotersList();
     }
+    setTimeout(() => { window.location.reload() }, 3000);
+    this.showDownvoteConfirmation();
   }
 
-
+  addUserToUpvotersList() {
+    const fetchedString = localStorage.getItem('userProfile');
+    const parsedToObject = JSON.parse(fetchedString);
+    const userWhoUpvoted = parsedToObject.userid;
+    const articleGotUpvoted = this.updatedVotes.articleid;
+    this._articleService.addUserToUpvotersList(userWhoUpvoted, articleGotUpvoted)
+      .subscribe(
+        res => {
+          console.log("Response: ", res);
+        }
+      );
+  }
 
   removeUserFromUpvotersList() {
     const fetchedString = localStorage.getItem('userProfile');
     const parsedToObject = JSON.parse(fetchedString);
-    this.updatedVotes.upvoters.push(parsedToObject.userid);
-    this._articleService.removeUserFromUpvotersList(this.updatedVotes, parsedToObject.userid, this.article.articleid)
+    const userWhoDownvoted = parsedToObject.userid;
+    const articleGotDownvoted = this.updatedVotes.articleid;
+    this._articleService.removeUserFromUpvotersList(userWhoDownvoted, articleGotDownvoted)
       .subscribe(
         res => {
           console.log("Response: ", res);
@@ -222,25 +194,26 @@ export class ArticleDetailComponent implements OnInit {
   addUserToDownvotersList() {
     const fetchedString = localStorage.getItem('userProfile');
     const parsedToObject = JSON.parse(fetchedString);
-    //console.log(parsedToObject.userid);
-    this.updatedVotes.downvoters.push(parsedToObject.userid);
-    this._articleService.addUserToDownvotersList(this.updatedVotes, parsedToObject.userid, this.article.articleid)
+    const userWhoDownvoted = parsedToObject.userid;
+    const articleGotDownvoted = this.updatedVotes.articleid;
+    this._articleService.addUserToDownvotersList(userWhoDownvoted, articleGotDownvoted)
       .subscribe(
         res => {
-        },
-        err => console.log(err)
+          console.log("Response: ", res);
+        }
       );
   }
 
   removeUserFromDownvotersList() {
     const fetchedString = localStorage.getItem('userProfile');
     const parsedToObject = JSON.parse(fetchedString);
-    this.updatedVotes.upvoters.push(parsedToObject.userid);
-    this._articleService.removeUserFromDownvotersList(this.updatedVotes, parsedToObject.userid, this.article.articleid)
+    const userWhoUpvoted = parsedToObject.userid;
+    const articleGotUpvoted = this.updatedVotes.articleid;
+    this._articleService.removeUserFromDownvotersList(userWhoUpvoted, articleGotUpvoted)
       .subscribe(
         res => {
-        },
-        err => console.log(err)
+          console.log("Response: ", res);
+        }
       );
   }
 

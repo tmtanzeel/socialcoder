@@ -15,9 +15,9 @@ export class ArticleService {
   private _deleteFromUpvotersListURL = "https://obscure-tundra-38074.herokuapp.com/api/remove-from-upvoters-list";
   private _addToDownvotersListURL = "https://obscure-tundra-38074.herokuapp.com/api/add-to-downvoters-list";
   private _deleteFromDownvotersListURL = "https://obscure-tundra-38074.herokuapp.com/api/remove-from-downvoters-list";
-  private _updateArtUpvotesURL = "https://obscure-tundra-38074.herokuapp.com/api/update-upvotes";
-  private _updateArtDownvotesURL = "https://obscure-tundra-38074.herokuapp.com/api/update-downvotes";
-  private _updateDownvotersListURL = "https://obscure-tundra-38074.herokuapp.com/api/update-upvoters-list";
+  // private _updateArtUpvotesURL = "https://obscure-tundra-38074.herokuapp.com/api/update-upvotes";
+  // private _updateArtDownvotesURL = "https://obscure-tundra-38074.herokuapp.com/api/update-downvotes";
+  // private _updateDownvotersListURL = "https://obscure-tundra-38074.herokuapp.com/api/update-upvoters-list";
 
   clickedArticle: Object = {};
 
@@ -43,29 +43,25 @@ export class ArticleService {
     return this.http.put<any>(this._updateArtURL, updatedArticle);
   }
 
-  increaseUpvote(updatedArticle, id) {
-    return this.http.put<any>(this._updateArtUpvotesURL + '/' + id, updatedArticle);
-  }
+
 
   addUserToUpvotersList(userWhoUpvoted, articleGotUpvoted) {
     return this.http.post<any>(this._addToUpvotersListURL + '/' + articleGotUpvoted + '/' + userWhoUpvoted, { responseType: 'text' as 'text' });
   }
 
-  removeUserFromUpvotersList(updatedArticle, id, id1) {
-    return this.http.delete<any>(this._deleteFromUpvotersListURL + '/' + id + '/' + id1, updatedArticle);
+  removeUserFromUpvotersList(userWhoDownvoted, articleGotDownvoted) {
+    return this.http.post<any>(this._deleteFromUpvotersListURL + '/' + articleGotDownvoted + '/' + userWhoDownvoted, { responseType: 'text' as 'text' });
   }
 
-  addUserToDownvotersList(updatedArticle, id, id1) {
-    return this.http.put<any>(this._addToDownvotersListURL + '/' + id + '/' + id1, updatedArticle);
+  addUserToDownvotersList(userWhoDownvoted, articleGotDownvoted) {
+    return this.http.post<any>(this._addToDownvotersListURL + '/' + articleGotDownvoted + '/' + userWhoDownvoted, { responseType: 'text' as 'text' });
   }
 
-  removeUserFromDownvotersList(updatedArticle, id, id1) {
-    return this.http.delete<any>(this._deleteFromDownvotersListURL + '/' + id + '/' + id1, updatedArticle);
+  removeUserFromDownvotersList(userWhoUpvoted, articleGotUpvoted) {
+    return this.http.post<any>(this._deleteFromDownvotersListURL + '/' + articleGotUpvoted + '/' + userWhoUpvoted, { responseType: 'text' as 'text' });
   }
 
-  decreaseUpvote(updatedArticle, id) {
-    return this.http.put<any>(this._updateArtDownvotesURL + '/' + id, updatedArticle);
-  }
+
 
   setClickedArticleObj(id) {
     localStorage.setItem('__ai', id);
