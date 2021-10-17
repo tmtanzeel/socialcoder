@@ -134,10 +134,6 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   upvoted() {
-    this.showUpvoteConfirmation();
-  }
-
-  upvoted1() {
     this.allowUpvote = false;
     this.allowDownvote = true;
     if (this.isADownvoter()) {
