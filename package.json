@@ -24,7 +24,7 @@
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^6.0.0",
     "@nicky-lenaers/ngx-scroll-to": "^3.0.1",
-    "black-duck-lib": "0.0.1",
+    "black-duck-lib": "0.0.3",
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
