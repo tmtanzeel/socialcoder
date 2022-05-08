@@ -18,32 +18,32 @@ import { FooterComponent } from './footer/footer.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { ContributeComponent } from './contribute/contribute.component'
-import { QuillModule} from 'ngx-quill';
+import { QuillModule } from 'ngx-quill';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { AuthGuard } from './auth.guard';
 import { UnknownComponentComponent } from './unknown-component/unknown-component.component';
 import { DiscussionsComponent } from './discussions/discussions.component';
 import { AskComponent } from './ask/ask.component';
 import { NgxTagsInputModule } from 'ngx-tags-input';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
-import {TooltipModule} from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
 import { SponcersComponent } from './sponcers/sponcers.component';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterModule, Routes } from '@angular/router';
 
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { EllipsisPipe } from './pipes/ellipsis.pipe';
 import { UserService } from './user.service';
 import { LoginService } from './core/authentication/login.service';
-import {DialogModule} from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { NewUserComponent } from './new-user/new-user.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -68,7 +68,8 @@ const appRoutes: Routes = [
     MyArticlesComponent,
     ArticleDetailComponent,
     SponcersComponent,
-    EllipsisPipe
+    EllipsisPipe,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
@@ -92,18 +93,18 @@ const appRoutes: Routes = [
       {
         loader: {
           provide: TranslateLoader,
-          useFactory: (http: HttpClient) => { return new TranslateHttpLoader(http, '../assets/i18n/','.json')},
+          useFactory: (http: HttpClient) => { return new TranslateHttpLoader(http, '../assets/i18n/', '.json') },
           deps: [HttpClient]
         }
       }
     )
   ],
   providers: [MessageService, AuthService, AuthGuard, ArticleService, UserService, LoginService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
-    multi: true
-  }],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
