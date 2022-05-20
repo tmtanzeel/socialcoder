@@ -1,0 +1,6 @@
+body .ui-chips > ul.ui-inputtext {
+    padding: 0.2145em 0.429em;
+    display: inline-block;
+    border: none !important;
+    background: red !important;
+}

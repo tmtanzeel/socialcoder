@@ -9,13 +9,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class NewUserComponent implements OnInit {
 
   registrationForm: FormGroup;
-  skills = [
-    { name: 'fdsfds', value: 'dsfds' }
-  ];
-  selectedSkills;
+  skillsCount: number;
+  showWarning: boolean;
+
   constructor() { }
 
   ngOnInit() {
+    this.skillsCount = 0;
+    this.showWarning = false;
     this.registrationForm = new FormGroup({
       userDetails: new FormGroup({
         firstName: new FormControl(''),
@@ -23,13 +24,23 @@ export class NewUserComponent implements OnInit {
         userName: new FormControl('')
       }),
       password: new FormControl(''),
-      passwordConfirm: new FormControl('')
+      passwordConfirm: new FormControl(''),
+      skills: new FormControl('')
     })
   }
 
   onSubmit() {
     console.log(this.registrationForm);
+  }
 
+  countSkills(e) {
+    this.skillsCount = this.registrationForm.controls.skills.value.length;
+    if (this.skillsCount > 5) {
+      this.showWarning = true;
+    }
+    else {
+      this.showWarning = false;
+    }
   }
 
 }
