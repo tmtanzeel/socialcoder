@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.ui-chips ul {
+    width: 100% !important;
+}
+
+.ui-chips > ul.ui-inputtext .ui-chips-token {
+    margin: 0.2em 0.286em 0 0 !important;
+}

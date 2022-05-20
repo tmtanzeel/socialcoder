@@ -75,27 +75,28 @@
                                         type="password"
                                         name="password-confirm"
                                         formControlName="passwordConfirm"
-                                        placeholder="This has to match exactly with the password you provided">
+                                        placeholder="This has to match exactly with the password you provided above">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label for="password">Skills <small>(This will help us find relevant topics for you).</small> </label>
-                                    <!-- <p-multiSelect
-                                        [options]="skills"
-                                        [(ngModel)]="selectedSkills"
-                                        optionLabel="name">
-                                    </p-multiSelect> -->
-                                </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="p-chips">Skills <small>(This will help us find relevant topics for you).</small> </label>
+                                <p-chips
+                                    (onAdd)="countSkills($event)"
+                                    (onRemove)="countSkills($event)"
+                                    formControlName="skills"
+                                    placeholder="Separated by ENTER">
+                                </p-chips>
+                                <label for="p-chips" *ngIf="showWarning"><small>4-5 skills are enough. Please go ahead if you still want to add more.</small> </label>
                             </div>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="submit">Done</button>
                 </form>
+
             </div>
         </div>
     </div>
