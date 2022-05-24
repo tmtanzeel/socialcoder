@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ChipsModule } from 'primeng/chips';
+import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -44,6 +45,8 @@ import { DialogModule } from 'primeng/dialog';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NewUserComponent } from './new-user/new-user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { CardModule } from 'primeng/card';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -69,11 +72,14 @@ const appRoutes: Routes = [
     ArticleDetailComponent,
     SponcersComponent,
     EllipsisPipe,
-    NewUserComponent
+    NewUserComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
     ChipsModule,
+    ButtonModule,
+    CardModule,
     BrowserAnimationsModule,
     CarouselModule,
     DialogModule,

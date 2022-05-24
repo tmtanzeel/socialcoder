@@ -1,0 +1,23 @@
+<div class="container" style="margin-top:100px;">
+    <div class="row">
+        <p-card
+            header="{{userProfile.firstName+' '+userProfile.lastName}}"
+            subheader="Full Stack Developer"
+            [style]="{width: '560px'}"
+            styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <img alt="Card" src="assets/images/usercard.png">
+            </ng-template>
+            <p>
+                Knows about following technologies:
+            </p>
+            <span *ngFor="let skill of userSkills">
+                <p-button label="{{skill}}" styleClass="ui-button-info"></p-button>
+            </span>
+            <ng-template pTemplate="footer">
+                <!-- <p-button label="Save" icon="pi pi-check"></p-button>
+                <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button> -->
+            </ng-template>
+        </p-card>
+    </div>
+</div>

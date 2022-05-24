@@ -18,9 +18,9 @@ export class UserProfileService {
     private auth: AuthService
   ) {
     this._userProfile$ = new BehaviorSubject<Profile>(JSON.parse(localStorage.getItem('userProfile')));
-   }
+  }
 
-   get userProfile$() {
+  get userProfile$() {
     return this._userProfile$.asObservable();
   }
   setUserProfileValue(data) {
@@ -28,14 +28,14 @@ export class UserProfileService {
   }
 
   setProfileData(data) {
-      this.setUserProfileValue(data);
+    this.setUserProfileValue(data);
   }
 
   refreshProfileData(data: any) {
     return new Observable(observer => {
-    observer.next(this.adapter.adapt(data));
+      observer.next(this.adapter.adapt(data));
     });
-}
+  }
 
 
 }

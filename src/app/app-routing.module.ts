@@ -12,6 +12,7 @@ import { AskComponent } from './ask/ask.component';
 import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'discussions', component: DiscussionsComponent },
   //{ path: 'register', component: RegisterComponent },
   { path: 'register', component: NewUserComponent },
+  { path: 'user-details', component: UserDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'ask', component: AskComponent },
   { path: 'myarticles', component: MyArticlesComponent },
