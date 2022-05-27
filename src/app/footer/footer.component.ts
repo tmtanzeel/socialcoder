@@ -28,7 +28,6 @@ export class FooterComponent implements OnInit {
   }
 
   getLastesMergeHistory() {
-    console.log("called");
     this._gitService.getCommitHistory()
       .subscribe(
         res => {

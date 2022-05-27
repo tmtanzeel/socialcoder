@@ -143,8 +143,6 @@ export class MyArticlesComponent implements OnInit {
   }
 
   keyDownFunction(event) {
-    console.log("called");
-
     if (event.keyCode === 13) {
       this.SearchFunction(this.text);
     }
