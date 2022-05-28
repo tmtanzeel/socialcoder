@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ignoreElements } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import { LoginService } from '../core/authentication/login.service';
+import { ProfessionListService } from '../profession-list.service';
 import { UserService } from '../user.service';
 export interface User {
   firstname: "",
@@ -24,16 +26,20 @@ export class NewUserComponent implements OnInit {
   registerUserData = {
     firstName: "",
     lastName: "",
-    password: "",
     userName: "",
+    password: "",
+    profession: "",
     skills: []
   };
   userNameConflict: boolean = false;
+  professions: Object[];
+  selectedProfession: string;
 
   constructor(
     private _authService: AuthService,
     private _loginService: LoginService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _professionListService: ProfessionListService
   ) { }
 
   ngOnInit() {
@@ -42,11 +48,8 @@ export class NewUserComponent implements OnInit {
     // fetch user list to cross check username conflict
     this._userService.getUsers()
       .subscribe((response) => {
-        console.log(response);
-
         this.users = response;
       })
-
 
     this.registrationForm = new FormGroup({
       userDetails: new FormGroup({
@@ -56,9 +59,19 @@ export class NewUserComponent implements OnInit {
       }),
       password: new FormControl(''),
       passwordConfirm: new FormControl(''),
+      profession: new FormControl(''),
       skills: new FormControl('')
     })
   }
+
+
+  search(event) {
+    this._professionListService.getProfessionList().subscribe((res) => {
+      this.professions = res;
+    })
+  }
+
+
 
   // currently not in use
   // crossCheckUsername(username: any) {

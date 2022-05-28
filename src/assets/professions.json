@@ -1,0 +1,10 @@
+[
+    { "name": "Product Owner", "code": "Product Owner" },
+    { "name": "SDE-I", "code": "SDE-I" },
+    { "name": "SDE-II", "code": "SDE-II" },
+    { "name": "SDE-III", "code": "SDE-III" },
+    { "name": "SDE-IV", "code": "SDE-IV" },
+    { "name": "Software Engineer-I", "code": "Software Engineer-I" },
+    { "name": "Software Engineer-II", "code": "Software Engineer-II" },
+    { "name": "Senior Architect", "code": "Senior Architect" }
+]

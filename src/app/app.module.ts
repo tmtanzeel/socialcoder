@@ -47,6 +47,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NewUserComponent } from './new-user/new-user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { CardModule } from 'primeng/card';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -82,6 +84,7 @@ const appRoutes: Routes = [
     CardModule,
     BrowserAnimationsModule,
     CarouselModule,
+    AutoCompleteModule,
     DialogModule,
     FormsModule,
     HttpClientModule,

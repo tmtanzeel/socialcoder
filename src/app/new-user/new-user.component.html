@@ -78,6 +78,21 @@
                                         placeholder="This has to match exactly with the password you provided above">
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label
+                                        for="profession">
+                                        What is your profession?
+                                    </label><br>
+                                    <p-autoComplete
+                                        formControlName="profession"
+                                        [(ngModel)]="selectedProfession"
+                                        [suggestions]="professions"
+                                        (completeMethod)="search($event)"
+                                        field="code">
+                                    </p-autoComplete>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div>
