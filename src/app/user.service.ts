@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserService {
+  private _usersUrl = "https://fine-gray-parrot-kilt.cyclic.app/api/users";
 
-  private _usersUrl = "https://obscure-tundra-38074.herokuapp.com/api/users";
-
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
 
   ngOnInit() {
     this.getUsers();
